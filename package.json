@@ -1,0 +1,27 @@
+{
+  "name": "boby-le-bot",
+  "version": "1.0.0",
+  "description": "Bot au service des potes à la compote",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/YsennaChang/discord-bot.git"
+  },
+  "keywords": [
+    "Discord",
+    "Bot",
+    "HayDay"
+  ],
+  "author": "Elyanna",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YsennaChang/discord-bot/issues"
+  },
+  "homepage": "https://github.com/YsennaChang/discord-bot#readme",
+  "dependencies": {
+    "discord.js": "^14.6.0"
+  }
+}
