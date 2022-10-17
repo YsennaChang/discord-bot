@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageEmbed, MessageActionRow, MessageButton } = require ("discord.js");
 
 module.exports = {
 
@@ -8,7 +7,7 @@ module.exports = {
         .setDescription("Calcule si tu as assez d'outils pour une tâche mine")
         .addIntegerOption(option =>
             option.setName('tache')
-                .setDescription('Nombre de minerais à extraire ? (La tâche 320 demande 99 minerais')
+                .setDescription(`Nombre de minerais à extraire ? (La tâche 320 demande 99 minerais)`)
                 .setRequired(true))
         .addIntegerOption(option =>
             option.setName('dynamite')
