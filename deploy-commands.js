@@ -7,7 +7,10 @@ const { clientId, guildId } = require('./config.json');
 
 const commands = [];
 // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
+
+console.log(fs.readdirSync("./commands"));
 const commandFiles = fs.readdirSync("./commands").filter( file => file.endsWith(".js"));
+
 
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
