@@ -1,4 +1,5 @@
 const { REST, Routes } = require('discord.js');
+const { clientId } = require('./config.json');
 
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
