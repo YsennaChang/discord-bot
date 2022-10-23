@@ -4,7 +4,7 @@ const {Client, Collection, GatewayIntentBits} = require('discord.js');
 const schedule = require("node-schedule");
 const flatCache = require("flat-cache");
 const kv = flatCache.load("cacheId")
-const { key, guildId, channelId } = require("./utils/variables");
+const { key, guildId, channelId, derbyPollTime, removeRoleTime, enPollTime, derbyStartTime } = require("./utils/variables");
 
 
 
@@ -71,7 +71,7 @@ client.on('ready', async c => {
    console.log(`Ready! Logged in as ${c.user.tag}`);
 
    //Derby Poll at Sunday 18 PM
-   schedule.scheduleJob('25 17 * * SUN', ()=> {
+   schedule.scheduleJob(derbyPollTime, ()=> {
       const guild = c.guilds.fetch(guildId);
       guild.then((g) => {
          const channel  = g.channels.cache.get(channelId);
@@ -82,7 +82,7 @@ client.on('ready', async c => {
    })
 
    // Remove Role at Monday 10 AM
-   schedule.scheduleJob('26 17 * * SUN', ()=> {
+   schedule.scheduleJob(removeRoleTime, ()=> {
       const pollData = kv.getKey(key);
       const guild = c.guilds.fetch(guildId);
       guild.then((g) => {
@@ -95,7 +95,7 @@ client.on('ready', async c => {
    })
    
    // End Poll at Tuesday 9:30 AM
-   schedule.scheduleJob('27 17 * * SUN', ()=> {
+   schedule.scheduleJob(enPollTime, ()=> {
       // Clean up kv to end the poll
       kv.removeKey(key);
       const guild = c.guilds.fetch(guildId)
@@ -107,7 +107,7 @@ client.on('ready', async c => {
       
    })
    // Derby Start at Tuesday 10 AM
-   schedule.scheduleJob('28 17 * * SUN', ()=> {
+   schedule.scheduleJob(derbyStartTime, ()=> {
       const guild = c.guilds.fetch(guildId)
       guild.then((g) => {
          const channel = g.channels.cache.get(channelId);
