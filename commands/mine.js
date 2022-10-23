@@ -26,7 +26,7 @@ module.exports = {
                 .setDescription('Combien de pioche as-tu ?')
                 .setRequired(true)),
 
-    async execut(interaction) {
+    async execute(interaction) {
         const tache = interaction.options.data[0].value;
         const dynamite = interaction.options.data[1].value;
         const tnt = interaction.options.data[2].value;
@@ -54,5 +54,5 @@ module.exports = {
         }
 
         await interaction.reply(content);
-    }
+    },
 };

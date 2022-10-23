@@ -3,7 +3,7 @@
 const fs = require("fs");
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const { clientId, guildId } = require('./config.json');
+const { clientId, guildId, token } = require('./config.json');
 
 const commands = [];
 // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
@@ -18,7 +18,7 @@ for (const file of commandFiles) {
 }
 
 // Construct and prepare an instance of the REST module
-const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
+const rest = new REST({ version: '9' }).setToken(token);
 
 // and deploy your commands!
 (async () => {
