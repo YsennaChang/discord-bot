@@ -1,7 +1,7 @@
 exports.key = 'poll';
 
 // Messages récurrents
-exports.derbyPollTime = "30 18 * * SUN";
+exports.derbyPollTime = "45 18 * * SUN";
 exports.removeRoleTime = "00 10 * * MON";
 exports.enPollTime = "30 09 * * TUE";
 exports.derbyStartTime = "00 10 * * TUE";
