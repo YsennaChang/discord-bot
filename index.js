@@ -160,3 +160,4 @@ client.on('interactionCreate', async interaction => {
 // connecter le script au bot discord
 client.login(process.env.TOKEN);
 
+//need to test something on Gaming Serv
