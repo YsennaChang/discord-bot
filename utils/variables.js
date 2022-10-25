@@ -1,10 +1,10 @@
 exports.key = 'poll';
 
 // Messages récurrents UTC 00 (server time)
-exports.derbyPollTime = "00 16 * * SUN"; // Dim 18h Paris
-exports.removeRoleTime = "00 8 * * MON"; // Lun 10h Paris
-exports.enPollTime = "30 07 * * TUE"; // MAR 9h30 Paris
-exports.derbyStartTime = "00 8 * * TUE"; // Mar 10h Paris
+exports.derbyPollTime = "00 18 * * SUN"; // Dim 18h Paris
+exports.removeRoleTime = "00 10 * * MON"; // Lun 10h Paris
+exports.enPollTime = "30 09 * * TUE"; // MAR 9h30 Paris
+exports.derbyStartTime = "00 10 * * TUE"; // Mar 10h Paris
 
 // variables serveur
 exports.timeBetweenPollDerby = (24+16)*60*60; // délais entre le sondage et début derby.
