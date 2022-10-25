@@ -2,11 +2,10 @@ const fs = require('node:fs');
 const path = require('node:path');
 const {Client, Collection, GatewayIntentBits} = require('discord.js');
 const schedule = require("node-schedule");
-const flatCache = require("flat-cache");
+const flatCache = require("flat-cache"); // gestionnaire de kv
 const kv = flatCache.load("cacheId")
 const { key, guildId, channelId, derbyPollTime, removeRoleTime, enPollTime, derbyStartTime } = require("./utils/variables");
-
-
+require ("dotenv").config();
 
 const client = new Client({ 
    intents: [
@@ -19,10 +18,7 @@ const client = new Client({
    partials: ['MESSAGE', 'CHANNEL', 'REACTION']
 });
 
-
-
 //======> Declare all function files <======//
-
 
 // add commands collection
 client.commands = new Collection();
