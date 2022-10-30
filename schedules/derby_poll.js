@@ -50,7 +50,7 @@ module.exports = {
       }
     }
 
-    const pollEmbed = await channel.send({ embeds : [embed]})
+    const pollEmbed = await channel.send({ content : `||<@&${roleToTagId}>||`, embeds : [embed]})
     
     //Add Reactions
     pollEmbed.react(emojiCheck)

@@ -9,11 +9,11 @@ module.exports = {
     let member = react.message.guild.members.cache.find(member => member.id === user.id)
     var p = [];
     var afk = [];
+    var r = [];
+    
     // add roleToAdd to the reactedmember
     if (react.emoji.name === emojiCheck && 
       !member.roles.cache.some((role) => role === roleToAddId)) {
-      console.log("add")
-      console.log(member.roles)
       await member.roles.add(roleToAddId);
     }
     // remove roleToAddId from afk

@@ -12,7 +12,7 @@ module.exports = {
       color : botColor
     }
 
-    await channel.send({embeds : [embed]})
+    await channel.send({content : `||<@&${roleToAddId}>||`, embeds : [embed]})
 
   }
 }

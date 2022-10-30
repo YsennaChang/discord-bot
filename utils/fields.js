@@ -48,6 +48,7 @@ const displayNumberOfParticipant = (participantsObject) => {
   let content = emojiTeam + ' ' + participantsObject.size + phrase;
   return content;
 }
+
 // Nom des participants
 const displayNickNameOfParticpants =(participantsObject) => {
     if(participantsObject.size>0){

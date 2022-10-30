@@ -10,7 +10,6 @@ module.exports = {
     var p = [];
     var afk = [];
 
-    console.log(member.roles.cache)
     if (react.emoji.name === emojiCheck) {
       // remove roleToAdd from reactedmember
       member.roles.remove(roleToAddId);

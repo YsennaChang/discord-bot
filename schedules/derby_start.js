@@ -23,7 +23,7 @@ module.exports= {
       Sélectionner « ✅ » si lu.`,
       color : botColor
     }
-    const derbyStartEmbed = await channel.send({ embeds : [embed]})
+    const derbyStartEmbed = await channel.send({content : `||<@&${roleToAddId}>||`, embeds : [embed]})
     
     //Add Reaction
     derbyStartEmbed.react(emojiCheck);
