@@ -4,20 +4,17 @@ const {emojiCheck, emojiX} = require('../utils/emojis.js');
 
 module.exports = {
   name : "add",
-  async execute(react, user, pollData) {
+  async execute(react, user, pollData, membersWithRoleToTag) {
 
-    let member = react.message.guild.members.cache.find(member => member.id === user.id)
-    var p = [];
-    var afk = [];
-    var r = [];
-    
+    const member = react.message.guild.members.cache.find(member => member.id === user.id)
+
     // add roleToAdd to the reactedmember
-    if (react.emoji.name === emojiCheck && 
+    if (react.emoji.name === emojiCheck &&
       !member.roles.cache.some((role) => role === roleToAddId)) {
       await member.roles.add(roleToAddId);
     }
     // remove roleToAddId from afk
-    if (react.emoji.name === emojiX && 
+    if (react.emoji.name === emojiX &&
       member.roles.cache.some((role) => role === roleToAddId)) {
       await member.roles.remove(roleToAddId);
     }
@@ -25,15 +22,15 @@ module.exports = {
     // Populate p
     const pReact = react.message.reactions.cache.get(emojiCheck);
     const checkMembers = await pReact.users.fetch();
-    p = checkMembers.filter(member => !member.bot);
+    const p = checkMembers.filter(member => !member.bot);
 
     // populate afk
     const xReact = react.message.reactions.cache.get(emojiX);
     const xMembers = await xReact.users.fetch();
-    afk = xMembers.filter(member => !member.bot);
+    const afk = xMembers.filter(member => !member.bot);
 
     // dismiss the other react when both Check and X are reacted
-    if (p.some((m) => m.id === member.id) && 
+    if (p.some((m) => m.id === member.id) &&
     afk.some((m) => m.id === member.id)) {
       if (react.emoji.name === emojiCheck) {
         await react.message.reactions.cache.get(emojiX).users.remove(member.id);
@@ -59,19 +56,17 @@ module.exports = {
       }
     }
 
-    // take taggedMembers and p and afk then do r 
+    // take taggedMembers and p and afk then do r
     const users = p.concat(afk);
 
-    r = pollData.taggedMembers.filter((taggedMember) => {
-      return users.filter((user) => {
-        return user.id === taggedMember;
-      }).length ==0
+    const r = membersWithRoleToTag.filter((taggedMember) => {
+      return !users.some( user => user.id === taggedMember.id);
     })
 
     // update embed message
     const fields = generateFields(
-      pollData.end, 
-      pollData.leftTime, 
+      pollData.end,
+      pollData.leftTime,
       p, r, afk
     );
 
@@ -88,7 +83,7 @@ module.exports = {
       };
       return embeds;
     };
-    
+
     await react.message.fetch(pollData.embed_id)
     .then( message => {
       message.edit({ embeds : [generateNewEmbeds(message.embeds[0].data, fields)]})

@@ -25,13 +25,13 @@ const field = (name, value, inline) => {
   };
   
 // liste des "N'ont pas encore répondu :"
-const displayNotReactedTeamMembers = (remainNotReactedTeamMembersArray) => {
+const displayNotReactedTeamMembers = (remainNotReactedTeamMembersObject) => {
   let content = '';
-  if (remainNotReactedTeamMembersArray.length !== 0) {
-    for (let i = 0; i < remainNotReactedTeamMembersArray.length; i++) {
-      content += `<@!${remainNotReactedTeamMembersArray[i]}> `;
+  if (remainNotReactedTeamMembersObject.size !== 0) {
+    for (const member of remainNotReactedTeamMembersObject) {
+      content += `<@!${member[0]}> `;
     }
-  } else if (remainNotReactedTeamMembersArray.length === 0) {
+  } else if (remainNotReactedTeamMembersObject.size === 0) {
     content = `Tout le monde a répondu à l'appel :v: `;
   }
   return content;
@@ -67,7 +67,7 @@ const displayNickNameOfAfk = (afkMemberObject) => {
   if(afkMemberObject.size>0){
       let content = '';
       for (const afkMember of afkMemberObject) {
-        content += `<@!${afkMember[0]}>`
+        content += `<@!${afkMember[0]}> `
       }
       return content
   } else {
@@ -75,7 +75,7 @@ const displayNickNameOfAfk = (afkMemberObject) => {
   }
 }
 
-module.exports.generateFields = (end, leftTime, participantsObject, remainNotReactedTeamMembersArray, afkMemberObject) => {
+module.exports.generateFields = (end, leftTime, participantsObject, remainNotReactedTeamMembersObject, afkMemberObject) => {
     const dateField = field(
         `${emojiCalendrier} Début du derby`,
         `${emojiCalendrier} <t:${end}:F>`,
@@ -89,7 +89,7 @@ module.exports.generateFields = (end, leftTime, participantsObject, remainNotRea
     );
     const memberRemainField = field(
         `N'ont pas encore répondu à l'appel :`,
-        `${displayNotReactedTeamMembers(remainNotReactedTeamMembersArray)}`,
+        `${displayNotReactedTeamMembers(remainNotReactedTeamMembersObject)}`,
         false
     );
 

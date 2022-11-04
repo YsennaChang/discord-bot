@@ -12,10 +12,10 @@ const {
 } = require('../utils/variables.js');
 
 // init global variables
-var taggedMembers = [];
-var p = new Map(); //Members that reacted to the poll
-var afk = new Map(); // afk members
-var r = []; //remain members that hasn't reacted yet of the called team
+let taggedMembers = [];
+let p = new Map(); //Members that reacted to the poll
+let afk = new Map(); // afk members
+let r = []; //remain members that hasn't reacted yet of the called team
 
 
 let start = Math.floor(Date.now()/ 1000);
@@ -24,21 +24,15 @@ let leftTime = end - delay; // clôture des inscriptions
 
 module.exports = {
   name : "derby_poll",
-  async execute(channel, members, kv) {
-    // Retrieve members of the choosen team (their reactions aint an option)
-    for (let member of members) {
-      if (member[1]._roles.includes(roleToTagId)) {
-        taggedMembers.push(member[0]);
-      }
-    }
-
+  async execute(channel, membersWithRoleToTag, kv) {
+    
     // Create embeds Messages
     const embed = {
       type : "rich",
       title : `Participation au Derby`,
       description : `Seras-tu dispo pour le prochain Derby?`,
       color : botColor,
-      fields : generateFields(end, leftTime, p, taggedMembers, afk),
+      fields : generateFields(end, leftTime, p, membersWithRoleToTag, afk),
       image: {
         url: banniereURL,
         height: 0,
@@ -62,9 +56,7 @@ module.exports = {
       key, {
         embed_id: pollEmbed.id,
         end, // début du derby
-        leftTime, // clôture des inscriptions
-        taggedMembers, 
-        r
+        leftTime// clôture des inscriptions
       })
 
     await console.log(kv.getKey(key))

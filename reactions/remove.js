@@ -4,11 +4,9 @@ const {emojiCheck, emojiX} = require('../utils/emojis.js');
 
 module.exports = {
   name : "remove",
-  async execute( react, user, pollData) {
+  async execute( react, user, pollData, membersWithRoleToTag) {
 
-    let member = await react.message.guild.members.cache.find(member => member.id === user.id)
-    var p = [];
-    var afk = [];
+    const member = react.message.guild.members.cache.find(member => member.id === user.id)
 
     if (react.emoji.name === emojiCheck) {
       // remove roleToAdd from reactedmember
@@ -16,22 +14,20 @@ module.exports = {
     }
 
     // Populate p
-    const pReact = await react.message.reactions.cache.get('✅');
+    const pReact = await react.message.reactions.cache.get(emojiCheck);
     const checkMembers = await pReact.users.fetch();
-    p = checkMembers.filter(member => !member.bot);
+    const p = checkMembers.filter(member => !member.bot);
 
     // populate afk
-    const xReact = await react.message.reactions.cache.get('❌');
+    const xReact = await react.message.reactions.cache.get(emojiX);
     const xMembers = await xReact.users.fetch();
-    afk = xMembers.filter(member => !member.bot);
+    const afk = xMembers.filter(member => !member.bot);
 
     // take taggedMembers and p and afk then do r 
     const users = p.concat(afk);
 
-    r = pollData.taggedMembers.filter(function (taggedMember) {
-      return users.filter((user) => {
-        return user.id === taggedMember;
-      }).length ==0
+    const r = membersWithRoleToTag.filter((taggedMember) => {
+      return !users.some( user => user.id === taggedMember.id);
     })
 
 

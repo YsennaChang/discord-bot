@@ -11,9 +11,7 @@ const sleep = async (ms) => {
 
 module.exports = {
   name : "remove_role",
-  async execute (members, msg){
-    // list of member which has the role roleToAdd
-    const membersWithRoleToAdd = members.filter( member => member.roles.includes(roleToAddId));
+  async execute (membersWithRoleToAdd, msg){
 
     //Populate p
     const pReact = msg.reactions.cache.get(emojiCheck);
@@ -22,8 +20,8 @@ module.exports = {
     for (let member of membersWithRoleToAdd) {
       if (!p.some(participant => participant.id === member.id)) {
         try {
-          await member[1].roles.remove(roleToAddId);
-          console.log("successfull removed role  from " + member[1].nickname);
+          await member._roles.remove(roleToAddId);
+          console.log("successfull removed role  from " + member.nickname);
           await sleep(1000);
         } catch (e) {
           console.log(e); // Logging error
